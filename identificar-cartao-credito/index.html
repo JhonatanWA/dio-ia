@@ -1,0 +1,39 @@
+<!-- Crie uma estrutura padrão de HTML com espaço para codificar javascript -->
+<!DOCTYPE html>
+<html lang="pt-br">     
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Identificar de bandeira de cartão de crédito</title>
+    <link rel="stylesheet" href="style.css">    
+</head>
+<body>
+    <h1>Identificar de bandeira de cartão de crédito</h1>
+    <p></p>
+    <input type="text" id="numeroCartao" placeholder="Digite o número do cartão">
+    <button id="identificarBtn">Identificar Bandeira</button>
+</body>
+<script> 
+
+// Adiciona um evento de clique ao botão para identificar a bandeira do cartão
+document.getElementById('identificarBtn').addEventListener('click', function() {
+    const numeroCartao = document.getElementById('numeroCartao').value;
+    const bandeira = identificarBandeira(numeroCartao);
+    document.querySelector('p').innerText = `Bandeira do cartão: ${bandeira}`;
+});
+
+// Função para identificar a bandeira do cartão de crédito
+function identificarBandeira(numero) {
+    numero = numero.replace(/\D/g, ''); // Remove caracteres não numéricos
+
+    if (/^4/.test(numero)) return "Visa";
+    if (/^(5[1-5]|222[1-9]|22[3-9]\d|2[3-6]\d{2}|27[01]\d|2720)/.test(numero)) return "MasterCard";
+    if (/^(4011|4312|4389)/.test(numero)) return "Elo";
+    if (/^(34|37)/.test(numero)) return "American Express";
+    if (/^(6011|65|64[4-9])/.test(numero)) return "Discover";
+    if (/^6062/.test(numero)) return "Hipercard";
+    return "Bandeira não identificada";
+}
+
+</script>
+</html>
